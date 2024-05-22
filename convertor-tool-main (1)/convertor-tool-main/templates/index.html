@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home -MineConvert</title>
+
+
+<!-- .................csss....................... -->
+<link rel="stylesheet" href="convertor.css">
+
+
+<style>
+
+    /* Navbar Styles */
+
+    .navbar {
+    font-family:Arial, Helvetica, sans-serif;
+        font-weight: bold;
+      background-color: #ffffff;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-logo .logo-text {
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 3px;
+    }
+    
+    .navbar-menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .navbar-menu li {
+      display: inline-block;
+      margin-left: 35px;
+      margin-right: 30px;
+    }
+    
+    .navbar-menu li a {
+        font-weight: bold;
+    
+      color: #100f0f;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    
+    .navbar-menu li a:hover {
+      color: #00f;
+    }
+    
+    .social-icons a {
+        font-weight: bold;
+    
+      color: #000000;
+      margin-right: 10px;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      color: #00f;
+    }
+    
+    /* Font Awesome Styles */
+    
+    .fa {
+      line-height: 1;
+    }
+    
+{% comment %} -------------------------main menu-------------------- {% endcomment %}
+
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+  }
+
+  .paragraph1 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     
+  }
+
+  .container {
+      max-width: 400px;
+      margin: 0 auto;
+  }
+
+  .form-group {
+      margin-bottom: 10px;
+    
+  }
+
+  label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+  }
+
+  select {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+  }
+
+  button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color:black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    font-weight: bold;
+
+  }
+
+
+  .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      font-weight: bold;
+  }
+  .paragraph2{
+    text-align: center;
+    font-size: large;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    
+  }
+
+  button:hover {
+    background-color: #3b9140;
+
+  }
+  .paragraph2:hover{
+    background-color: #3b9140;
+    
+  }
+  .footer{
+    background-color: rgb(80, 80, 80);
+    color: aliceblue;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+    <!-- ----------------------------navbar------------------------- -->
+    <section>
+        <section>
+            <nav class="navbar">
+              <div class="navbar-logo">
+                <h1 class="logo-text">MineConvert</h1>
+              </div>
+              <ul class="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+              <div class="social-icons">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-google"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </nav>
+    </section>
+    <script src="https://use.fontawesome.com/03f8a0ebd4.js"></script>
+</section>
+
+
+     <section>
+        <h5 class="paragraph1">Infix to Postfix/Prefix Converter</h5>
+        <div class="container">
+            <form method="POST" action="{% url 'convert_expression' %}">
+
+            {% csrf_token %}
+           
+            <div class="form-group">
+              <label for="expression">Infix Expression:</label>
+              <input type="text" id="expression" name="expression" placeholder="Enter infix expression" >
+            </div>
+            <div class="form-group">
+              <label for="conversion">Select Conversion:</label>
+              <select id="conversion" name="conversion">
+                <option value="postfix">Postfix</option>
+                <option value="prefix">Prefix</option>
+              </select>
+            </div>
+            <div class="paragraph2">
+              <button type="submit">Convert</button>
+            </div>
+          </form>
+          <div class="result">
+            <h3>Result:</h3>
+            <p id="convertedExpression">{{ converted_expression|safe }}</p>
+
+          </div>
+        </div>
+      </section>
+      
+
+
+<br><br>
+     <h3 style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">by chetan</h3>
+     <!-- ---------------------footer------------------ -->
+
+     
+     <div class="footer">
+     <footer>
+      <p>Copyright &copy; MineConvert.com</p>
+    </footer>
+  </div>
+     
+
+
+     <script>
+      function convert() {
+         document.querySelector('form').submit();
+          var expression = document.getElementById("expression").value;
+          var conversion = document.getElementById("conversion").value;
+          var convertedExpression = "";
+
+          // Perform the conversion logic here
+          // You can use JavaScript or any programming language of your choice
+
+          // Set the converted expression
+          document.getElementById("convertedExpression").textContent = convertedExpression;
+      }
+  </script>
+</body>
+</html>
